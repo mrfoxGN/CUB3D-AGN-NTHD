@@ -10,6 +10,7 @@
 
 #define W_HIGHT 800
 #define W_WIDTH 800
+#define BUFFER_SIZE 42
 
 typedef struct s_mlx
 {
@@ -20,6 +21,10 @@ typedef struct s_mlx
 typedef struct s_game
 {
     t_mlx mlx;
+    int fd;
+    char **map;
+    int map_width;
+    int map_height;
     
 } t_game;
 
@@ -28,5 +33,6 @@ typedef struct s_game
 
 // init
 t_game *init_game(char **argv);
+char	*get_next_line(int fd);
 
 #endif
