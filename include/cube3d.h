@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <mlx.h>
+#ifdef USE_MINILIBX
+# include <mlx.h>
+#endif
 #include <math.h>
 #include "../lib/libft.h"
 
@@ -34,5 +36,8 @@ typedef struct s_game
 // init
 t_game *init_game(char **argv);
 char	*get_next_line(int fd);
+char **read_map(char *file_name,t_game *game);
+char **expand_ligne_map(char **old_map,char *new_line);
+int count_lignes_map(char **map);
 
 #endif
