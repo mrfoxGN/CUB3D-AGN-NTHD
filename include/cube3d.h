@@ -39,5 +39,10 @@ char	*get_next_line(int fd);
 char **read_map(char *file_name,t_game *game);
 char **expand_ligne_map(char **old_map,char *new_line);
 int count_lignes_map(char **map);
+int is_line_border_valid(const char *line);
+int is_line_content_valid(const char *line);
+int is_map_valid(char **map);
+int is_line_all_ones(const char *line);
+
 
 #endif

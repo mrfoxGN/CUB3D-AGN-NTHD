@@ -6,7 +6,7 @@ INCLUDES:= -Iinclude -Ilibft -Iminilibx-linux
 LIBS    := -lmlx -lm -lX11 -lXext
 
 # List source filenames relative to src/
-SRCS    := main.c init_game.c parsing1.c
+SRCS    := main.c init_game.c parsing1.c ../get_next_line_/get_next_line.c ../get_next_line_/get_next_line_utils.c
 BIN_DIR := bin
 OBJS    := $(addprefix $(BIN_DIR)/,$(SRCS:.c=.o))
 
