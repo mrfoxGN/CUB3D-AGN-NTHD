@@ -10,6 +10,7 @@ typedef struct s_parse_ctx
     int     trou_vu;
     int     violation_trou;
     int     nb_lignes;
+    int num_of_players;
 }   t_parse_ctx;
 
 static int is_blank_line(const char *s)
@@ -60,12 +61,43 @@ int is_line_border_valid(const char *line)
         len = ft_strlen(line);
         while (j < len-1)
         {
-            if (line[j] != '1' && line[j] != '0')
+            if (line[j] != '1' && line[j] != '0'
+                && line[j] != 'N' && line[j] != 'S'
+                && line[j] != 'E' && line[j] != 'W')
                 return 0;
             j++;
         }
         return 1;
     }
+
+int check_and_store_player(t_game *game)
+{
+    int i = 0;
+    int j;
+    int count = 0;
+    char c;
+    if (!game || !game->map)
+        return 0;
+    game->player_dir = '\0';
+    while (game->map[i])
+    {
+        j = 0;
+        while (game->map[i][j])
+        {
+            c = game->map[i][j];
+            if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+            {
+                count++;
+                game->player_dir = c;
+                if (count > 1)
+                    return 0;
+            }
+            j++;
+        }
+        i++;
+    }
+    return count == 1;
+}
 
     int is_map_valid(char **map)
     {
@@ -201,6 +233,14 @@ char **read_map(char *file_name,t_game *game)
     if (ctx.violation_trou || !is_map_valid(ctx.carte))
     {
         free_map_all(ctx.carte);
+        close(game->fd);
+        return NULL;
+    }
+    game->map = ctx.carte;
+    if (!check_and_store_player(game))
+    {
+        free_map_all(ctx.carte);
+        game->map = NULL;
         close(game->fd);
         return NULL;
     }

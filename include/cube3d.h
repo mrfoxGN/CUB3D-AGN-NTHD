@@ -27,6 +27,7 @@ typedef struct s_game
     char **map;
     int map_width;
     int map_height;
+    char player_dir;
     
 } t_game;
 
@@ -43,6 +44,7 @@ int is_line_border_valid(const char *line);
 int is_line_content_valid(const char *line);
 int is_map_valid(char **map);
 int is_line_all_ones(const char *line);
+int check_and_store_player(t_game *game);
 
 
 #endif
