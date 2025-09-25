@@ -67,4 +67,7 @@ int pars_textures(t_game *gamed);
 int pars_argb(t_game *game);
 char  **read_file_cub(char *file_name, t_game *game);
 int	is_only_spaces(const char *s);
+/*static int check_enclosure(char **map);
+static int is_allowed(char c);
+static int is_inside_cell(char **map, int i, int j);*/
 #endif

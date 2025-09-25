@@ -89,8 +89,51 @@ int check_and_store_player(t_game *game)
     return count == 1;
 }
 
-    int is_map_valid(char **map)
+static int is_inside_cell(char **map, int i, int j)
+{
+    if (i < 0 || j < 0)
+        return 0;
+    if (!map[i])
+        return 0;
+    if ((int)ft_strlen(map[i]) <= j)
+        return 0;
+    return 1;
+}
+
+static int is_allowed(char c)
+{
+    return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+static int check_enclosure(char **map)
+{
+    int i = 0;
+    int j;
+    char c;
+    while (map && map[i])
     {
+        j = 0;
+        while (map[i][j])
+        {
+            c = map[i][j];
+            if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+            {
+                if (!is_inside_cell(map, i-1, j) || !is_inside_cell(map, i+1, j) ||
+                    !is_inside_cell(map, i, j-1) || !is_inside_cell(map, i, j+1))
+                    return 0;
+                if (!is_allowed(map[i-1][j]) || !is_allowed(map[i+1][j]) ||
+                    !is_allowed(map[i][j-1]) || !is_allowed(map[i][j+1]))
+                    return 0;
+            }
+            j++;
+        }
+        i++;
+    }
+    return 1;
+}
+
+ int is_map_valid(char **map)
+{
         int i = 0;
         int lines;
         if (!map || !map[0])
@@ -104,7 +147,6 @@ int check_and_store_player(t_game *game)
         // Last line all '1'
         if (!is_line_all_ones(map[lines-1]))
             return 0;
-        // Middle lines
         i = 1;
         while (i < lines-1)
         {
@@ -114,8 +156,11 @@ int check_and_store_player(t_game *game)
                 return 0;
             i++;
         }
+        if (!check_enclosure(map))
+            return 0;
         return 1;
     }
+
 
 int count_lignes_map(char **map)
 {
