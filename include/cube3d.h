@@ -63,10 +63,11 @@ int is_line_content_valid(const char *line);
 int is_map_valid(char **map);
 int is_line_all_ones(const char *line);
 int check_and_store_player(t_game *game);
-int pars_textures(t_game *gamed);
-int pars_argb(t_game *game);
 char  **read_file_cub(char *file_name, t_game *game);
 int	is_only_spaces(const char *s);
+int pars_textures__argb(t_game *game);
+int pars_argb(char *line,t_game *game);
+int pars_textures(char *line,t_game *game);
 /*static int check_enclosure(char **map);
 static int is_allowed(char c);
 static int is_inside_cell(char **map, int i, int j);*/
