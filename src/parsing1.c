@@ -2,16 +2,6 @@
 #include <fcntl.h>
 #include "get_next_line.h"
 
-typedef struct s_parse_ctx
-{
-    char    **carte;
-    t_game  *jeu;
-    int     contenu_vu;
-    int     trou_vu;
-    int     violation_trou;
-    int     nb_lignes;
-    int num_of_players;
-}   t_parse_ctx;
 
 static int is_blank_line(const char *s)
 {
@@ -217,7 +207,7 @@ static void read_lines_into_map(int fd, t_parse_ctx *ctx)
     }
 }
 
-char **read_map(char *file_name,t_game *game)
+char **read_map(t_game *game)
 {
     t_parse_ctx ctx;
     ctx.carte = NULL;
@@ -226,9 +216,6 @@ char **read_map(char *file_name,t_game *game)
     ctx.trou_vu = 0;
     ctx.violation_trou = 0;
     ctx.nb_lignes = -1;
-    game->fd = open(file_name, O_RDONLY);
-    if (game->fd < 0)
-        return NULL;
     read_lines_into_map(game->fd, &ctx);
     if (ctx.violation_trou || !is_map_valid(ctx.carte))
     {

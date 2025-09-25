@@ -1,3 +1,5 @@
+# Minimal Makefile to build test_parsing with parsing sources
+
 NAME = test_parsing
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude -I./ -Ilib -Iget_next_line_
