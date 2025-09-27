@@ -36,6 +36,8 @@ typedef struct s_game
     char *ceiling_color;
      int textures_parsed;
     int argb_parsed;
+    int *Floor;
+    int *Ceiling;
     
 } t_game;
 typedef struct s_parse_ctx
