@@ -16,25 +16,20 @@ t_game *create_mock_game(void)
     
     // Map dimensions
     game->map_width = 10;
-    game->map_height = 13;
+    game->map_height = 8;
     
     // Mock map (simple rectangular map)
     game->map = malloc(sizeof(char*) * (game->map_height + 1));
     game->map[0] = strdup("1111111111");
     game->map[1] = strdup("1000000001");
     game->map[2] = strdup("1000N00001");  // N = North-facing player
-    game->map[3] = strdup("1000001001");
+    game->map[3] = strdup("1001001001");
     game->map[4] = strdup("1010000001");
     game->map[5] = strdup("1000010001");
-    game->map[6] = strdup("1010000101");
-    game->map[7] = strdup("1010000101");
-    game->map[8] = strdup("1010000101");
-    game->map[9] = strdup("1010010101");
-    game->map[10] = strdup("1010100101");
-    game->map[11] = strdup("1010000101");
-    game->map[12] = strdup("1010000101");
-    game->map[13] = strdup("1111111111");
-    game->map[14] = NULL;  // Null-terminated
+    game->map[6] = strdup("1010100101");
+    game->map[7] = strdup("1010100101");
+    game->map[8] = strdup("1111111111");
+    game->map[9] = NULL;  // Null-terminated
 
 
     // Player direction

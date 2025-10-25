@@ -19,6 +19,7 @@
 #define SPEED 2
 #define ROT_SPEED 0.03
 #define PLAYER_SIZE 10
+#define FOV PI_MACRO / 3
 
 typedef struct s_player
 {
@@ -49,6 +50,13 @@ typedef struct s_mlx
     void *win_ptr;
 } t_mlx;
 
+typedef struct s_pixel
+{
+    int x;
+    int y;
+    int color;
+}t_pixel;
+
 typedef struct s_img
 {
 	void			*ptr;
@@ -63,6 +71,16 @@ typedef struct s_img
 	int				direction;
     void            *game;
 }					t_img;
+
+typedef struct s_res
+{
+    bool hit;
+    int x;
+    int y;
+    float distance;
+    float eye_dist;
+    int side;
+}t_res;
 
 typedef struct s_game
 {
@@ -124,7 +142,7 @@ static int is_inside_cell(char **map, int i, int j);*/
 /////////////////////////////////////////
 
 t_game *create_mock_game(void);
-int minimap(t_game *game);
+int raycasting(t_game *game);
 void	my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
 
 int key_press(int key, void *param);
@@ -132,15 +150,7 @@ int key_release(int key, void *param);
 int move_player(t_game *game);
 
 // DDA raycasting function
-typedef struct s_res
-{
-    bool hit;
-    int x;
-    int y;
-    float distance;
-    float eye_dist;
-    int side;
-}t_res;
+
 
 t_res dda(t_game *game, float camerax);
 
