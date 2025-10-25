@@ -1,17 +1,15 @@
-NAME = test_parsing
+NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -I./ -Ilib -Iget_next_line_
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilib -I/usr/local/include
+LDFLAGS = -L/usr/local/lib -lmlx -lXext -lX11 -lm
 LIBFT_DIR = lib
 LIBFT = $(LIBFT_DIR)/libft.a
-GNL_DIR = get_next_line_
-GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
-
-SRCS = \
-    src/parsing1.c \
-    src/parsing2.c \
-    src/parsing3.c \
-    test_parsing.c \
-    $(GNL_SRCS)
+SRCS = raycasting/main.c \
+		raycasting/game_mock.c \
+		raycasting/minimap.c \
+		raycasting/img_utils.c \
+		raycasting/mouvement.c \
+		raycasting/dda.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -21,7 +19,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJS)

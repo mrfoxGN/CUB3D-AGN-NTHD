@@ -1,3 +1,5 @@
 test_parsing.c
 test_parsing
 Makefile
+src
+cub3d

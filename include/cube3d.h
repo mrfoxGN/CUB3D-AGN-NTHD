@@ -4,21 +4,65 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#ifdef USE_MINILIBX
-# include <mlx.h>
-#endif
+#include <stdbool.h>
+#include <mlx.h>
+#include <X11/keysym.h>
+# include <X11/X.h>
 #include <math.h>
 #include "../lib/libft.h"
+#define PI_MACRO 3.14159265358979323846
 
 #define W_HIGHT 800
-#define W_WIDTH 800
+#define W_WIDTH 1200
+#define TILE_SIZE 32
 #define BUFFER_SIZE 42
+#define SPEED 1
+#define ROT_SPEED 0.01
+#define PLAYER_SIZE 10
+
+typedef struct s_player
+{
+    float px;
+    float py;
+
+    int dirx;
+    int diry;
+
+    float planex;
+    float planey;
+
+    float angle;
+
+    bool up; 
+    bool down; 
+    bool right; 
+    bool left; 
+
+    bool turn_left;
+    bool turn_right;
+    
+}t_player;
 
 typedef struct s_mlx
 {
     void *mlx_ptr;
     void *win_ptr;
 } t_mlx;
+
+typedef struct s_img
+{
+	void			*ptr;
+	char			*addr;
+	int				h;
+	int				w;
+	int				bpp;
+	int				end;
+	int				sl;
+	int				p_x;
+	int				p_y;
+	int				direction;
+    void            *game;
+}					t_img;
 
 typedef struct s_game
 {
@@ -34,12 +78,15 @@ typedef struct s_game
     char *ea_texture;
     char *floor_color;
     char *ceiling_color;
-     int textures_parsed;
+    int textures_parsed;
     int argb_parsed;
     int *Floor;
     int *Ceiling;
+    t_img img;
+    t_player p;
     
 } t_game;
+
 typedef struct s_parse_ctx
 {
     char    **carte;
@@ -73,4 +120,29 @@ int pars_textures(char *line,t_game *game);
 /*static int check_enclosure(char **map);
 static int is_allowed(char c);
 static int is_inside_cell(char **map, int i, int j);*/
+
+/////////////////////////////////////////
+
+t_game *create_mock_game(void);
+int minimap(t_game *game);
+void	my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
+
+int key_press(int key, void *param);
+int key_release(int key, void *param);
+int move_player(t_game *game);
+
+// DDA raycasting function
+typedef struct s_res
+{
+    bool hit;
+    int x;
+    int y;
+    float distance;
+    int side;
+}t_res;
+
+t_res dda(t_game *game, float camerax);
+
+// Raycasting functions
+
 #endif
