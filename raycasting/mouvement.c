@@ -1,5 +1,8 @@
 #include "cube3d.h"
 #include <math.h>
+#include <stdbool.h>
+#include <X11/keysym.h>
+#include <stdlib.h>
 
 int key_press(int key, void *param)
 {
@@ -49,11 +52,11 @@ int key_release(int key, void *param)
     return (0);
 }
 
-int is_wall(t_game *game, int px, int py)
+int is_wall(t_game *game, float px, float py)
 {
     int player_size = TILE_SIZE / 4;
     
-    int corners[4][2] = {
+    float corners[4][2] = {
         {px, py},                                    // Top-left
         {px + player_size, py},                      // Top-right
         {px, py + player_size},                      // Bottom-left
@@ -62,8 +65,8 @@ int is_wall(t_game *game, int px, int py)
     
     for (int i = 0; i < 4; i++)
     {
-        int map_x = corners[i][0] / TILE_SIZE;
-        int map_y = corners[i][1] / TILE_SIZE;
+        int map_x = (int)(corners[i][0] / TILE_SIZE);
+        int map_y = (int)(corners[i][1] / TILE_SIZE);
         
         if (map_x < 0 || map_y < 0 || 
             map_y >= game->map_height || 
@@ -96,25 +99,25 @@ int move_player(t_game *game)
     cos_angle = cosf(game->p.angle + PI_MACRO/2);
     sin_angle = sinf(game->p.angle + PI_MACRO/2);
 
-    if (game->p.right && !is_wall(game, game->p.px + SPEED, game->p.py))
+    if (game->p.right && !is_wall(game, game->p.px + cos_angle * SPEED, game->p.py + sin_angle * SPEED))
     {
         game->p.px += cos_angle * SPEED;
         game->p.py += sin_angle * SPEED;
     }
 
-    if (game->p.left && !is_wall(game, game->p.px - SPEED, game->p.py))
+    if (game->p.left && !is_wall(game, game->p.px - cos_angle * SPEED, game->p.py -sin_angle * SPEED))
     {
         game->p.px -= cos_angle * SPEED;
         game->p.py -= sin_angle * SPEED;
     }
 
-    if (game->p.up && !is_wall(game, game->p.px, game->p.py - SPEED))
+    if (game->p.up && !is_wall(game, game->p.px + cosf(game->p.angle) * SPEED, game->p.py + sinf(game->p.angle) * SPEED))
     {
         game->p.px += cosf(game->p.angle) * SPEED;
         game->p.py += sinf(game->p.angle) * SPEED;
     }
 
-    if (game->p.down && !is_wall(game, game->p.px, game->p.py + SPEED))
+    if (game->p.down && !is_wall(game, game->p.px - cosf(game->p.angle) * SPEED, game->p.py - sinf(game->p.angle) * SPEED))
     {
         game->p.px -= cosf(game->p.angle) * SPEED;
         game->p.py -= sinf(game->p.angle) * SPEED;

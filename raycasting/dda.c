@@ -4,6 +4,7 @@ t_res dda(t_game *game, float ray_angle)
 {
     t_player p = game->p;
     t_res result;
+    float eye_distance;
     
     // Calculate ray direction from angle
     float raydirx = cos(ray_angle);
@@ -86,6 +87,8 @@ t_res dda(t_game *game, float ray_angle)
     else
         distance = (mapy - posy + (1 - stepy) / 2) / raydiry;
 
+    eye_distance = distance * cos(ray_angle - p.angle);
+
     // Fill result structure
     result.hit = hit;
     // exact hit position in tile units, then convert to pixels
@@ -94,6 +97,7 @@ t_res dda(t_game *game, float ray_angle)
     result.x = (int)floorf(hitx * TILE_SIZE);
     result.y = (int)floorf(hity * TILE_SIZE);
     result.distance = distance;
+    result.eye_dist = eye_distance;
     result.side = side;
 
     return result;

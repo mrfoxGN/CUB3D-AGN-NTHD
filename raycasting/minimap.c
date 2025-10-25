@@ -142,7 +142,7 @@ int view_3d(t_game *game)
         ray_angle = game->p.angle + camerax * (fov / 2);
         res = dda(game, ray_angle);
     
-        int lineheight = W_HIGHT / res.distance;
+        int lineheight = W_HIGHT / res.eye_dist;
         int draw_start = W_HIGHT/2 - lineheight/2;
         if (draw_start < 0)
             draw_start = 0;

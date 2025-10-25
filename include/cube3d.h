@@ -16,8 +16,8 @@
 #define W_WIDTH 1200
 #define TILE_SIZE 32
 #define BUFFER_SIZE 42
-#define SPEED 1
-#define ROT_SPEED 0.01
+#define SPEED 2
+#define ROT_SPEED 0.03
 #define PLAYER_SIZE 10
 
 typedef struct s_player
@@ -138,6 +138,7 @@ typedef struct s_res
     int x;
     int y;
     float distance;
+    float eye_dist;
     int side;
 }t_res;
 
