@@ -14,11 +14,11 @@
 
 #define W_HIGHT 800
 #define W_WIDTH 1200
-#define TILE_SIZE 32
+#define TILE_SIZE 16
 #define BUFFER_SIZE 42
-#define SPEED 2
+#define SPEED 1
 #define ROT_SPEED 0.03
-#define PLAYER_SIZE 10
+#define PLAYER_SIZE 5
 #define FOV PI_MACRO / 3
 
 typedef struct s_player

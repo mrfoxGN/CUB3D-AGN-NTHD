@@ -131,6 +131,22 @@ void draw_vertical_line(t_img *img, int x, int drawstart, int drawend, int color
     }
 }
 
+int darken_color(int color, float factor)
+{
+    if (factor > 1.0f) factor = 1.0f;
+    if (factor < 0.0f) factor = 0.0f;
+    
+    int r = (color >> 16) & 0xFF;
+    int g = (color >> 8) & 0xFF;
+    int b = color & 0xFF;
+    
+    r = (int)(r * factor);
+    g = (int)(g * factor);
+    b = (int)(b * factor);
+    
+    return (r << 16) | (g << 8) | b;
+}
+
 int view_3d(t_game *game)
 {
     int i;
@@ -158,9 +174,19 @@ int view_3d(t_game *game)
             draw_end = W_HIGHT - 1;
         if (res.distance > 0.0f)
         {
-            draw_vertical_line(&game->img,i,0, draw_start ,0x4DA8DA);
-            draw_vertical_line(&game->img,i,draw_start, draw_end ,0x80D8C3);
-            draw_vertical_line(&game->img,i,draw_end, W_HIGHT ,0xFFD66B);
+            int wall_color = 0x80D8C3;
+            
+            float shade_factor = 1.0f - (res.distance / 40.0f); // Adjust 20.0f for fog distance
+            if (shade_factor < 0.2f) shade_factor = 0.2f; // Minimum brightness
+            
+            if (res.side == 1) // N/S walls are darker
+                shade_factor *= 0.7f;
+            
+            wall_color = darken_color(wall_color, shade_factor);
+            
+            draw_vertical_line(&game->img, i, 0, draw_start, 0x4DA8DA);
+            draw_vertical_line(&game->img, i, draw_start, draw_end, wall_color);
+            draw_vertical_line(&game->img, i, draw_end, W_HIGHT, 0xFFD66B);
         }
         i++;
     }
