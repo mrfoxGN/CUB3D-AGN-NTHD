@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <mlx.h>
+# include <mlx.h>
+// #include <../minilibx-linux/mlx.h>
 #include <X11/keysym.h>
 # include <X11/X.h>
 #include <math.h>
@@ -100,6 +101,8 @@ typedef struct s_game
     int argb_parsed;
     int *Floor;
     int *Ceiling;
+    int hexfloor;
+    int hexceiling;
     t_img img;
     t_player p;
     
