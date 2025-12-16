@@ -18,7 +18,7 @@ int *fill_elements(char **arr)
     i = 0;
     while (arr && arr[i] && i < 3)
     {
-        values[i] = atoi(arr[i]);
+        values[i] = atoi(arr[i]);//we need ft_atoi here && check range 0-255
         i++;
     }
     return (values);
@@ -33,6 +33,33 @@ int count_elemnts(char **arr)
     return count;
 }
 
+/* Convert an RGB array {r,g,b} to a single hex integer 0xRRGGBB */
+int rgb_to_hex(int *rgb)
+{
+    int r = 0;
+    int g = 0;
+    int b = 0;
+
+    if (!rgb)
+        return 0;
+    r = rgb[0];
+    g = rgb[1];
+    b = rgb[2];
+    if (r < 0) 
+        r = 0; 
+    if (r > 255) 
+        r = 255;
+    if (g < 0) 
+        g = 0; 
+    if (g > 255) 
+        g = 255;
+    if (b < 0) 
+        b = 0; 
+    if (b > 255) 
+        b = 255;
+    return (r << 16) | (g << 8) | b;
+}
+
 char  **read_file_cub(char *file_name, t_game *game)
 {
     char **map;
@@ -44,6 +71,7 @@ char  **read_file_cub(char *file_name, t_game *game)
     {
            if(game->argb_parsed == 2 && game->textures_parsed == 4)
            {
+
                 map = read_map(game);
                 if(map)
                 {
@@ -56,13 +84,41 @@ char  **read_file_cub(char *file_name, t_game *game)
                     }
                     game->Floor = fill_elements(floor);
                     game->Ceiling = fill_elements(ceiling);
+                    if (game->Floor)
+                        game->hexfloor = rgb_to_hex(game->Floor);
+                    if (game->Ceiling)
+                        game->hexceiling = rgb_to_hex(game->Ceiling);
+
+                    /* free split arrays */
+                    if (floor)
+                    {
+                        int i = 0;
+                        while (floor[i])
+                        {
+                            free(floor[i]);
+                            i++;
+                        }
+                        free(floor);
+                    }
+                    if (ceiling)
+                    {
+                        int i = 0;
+                        while (ceiling[i])
+                        {
+                            free(ceiling[i]);
+                            i++;
+                        }
+                        free(ceiling);
+                    }
                     return (map);
                 }
            }
-    } 
-    int i = 0;
+    }
+    else{
+    //int i = 0;
     printf("Error parsing .cub file\n");
+    }
+    close(fd);
     return (NULL);
 
-    close(fd);
 }
