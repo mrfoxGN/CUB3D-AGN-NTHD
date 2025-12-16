@@ -1,5 +1,4 @@
 #include "cube3d.h"
-#include "get_next_line.h"
 #include <fcntl.h>
 int *fill_elements(char **arr)
 {

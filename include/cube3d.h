@@ -5,17 +5,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <../minilibx-linux/mlx.h>
+# include <mlx.h>
+// #include <../minilibx-linux/mlx.h>
 #include <X11/keysym.h>
 # include <X11/X.h>
 #include <math.h>
 #include "../lib/libft.h"
-#define PI_MACRO 3.14159265358979323846
+# include "../get_next_line_/get_next_line.h"
 
+#define PI_MACRO 3.14159265358979323846
 #define W_HIGHT 800
 #define W_WIDTH 1200
 #define TILE_SIZE 16
-#define BUFFER_SIZE 42
 #define SPEED 1
 #define ROT_SPEED 0.03
 #define PLAYER_SIZE 5
@@ -122,7 +123,6 @@ typedef struct s_parse_ctx
 // **********************
 
 // init
-t_game *init_game(char **argv);
 char	*get_next_line(int fd);
 char **read_map(t_game *game);
 char **expand_ligne_map(char **old_map,char *new_line);

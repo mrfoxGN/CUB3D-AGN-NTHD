@@ -1,7 +1,6 @@
 #include "cube3d.h"
 #include <fcntl.h>
-#include "get_next_line.h"
-
+// #include "get_next_line.h"
 
 static int is_blank_line(const char *s)
 {
