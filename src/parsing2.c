@@ -1,6 +1,5 @@
 #include "cube3d.h"
 #include <fcntl.h>
-#include "get_next_line.h"
 
 int	is_only_spaces(const char *s)
 {

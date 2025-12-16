@@ -1,5 +1,4 @@
 #include "cube3d.h"
-#include "get_next_line.h"
 #include <fcntl.h>
 int *fill_elements(char **arr)
 {
@@ -60,8 +59,10 @@ char  **read_file_cub(char *file_name, t_game *game)
                 }
            }
     } 
-    int i = 0;
-    printf("Error parsing .cub file\n");
+    else
+    {
+        printf("Error parsing .cub file\n");
+    }
     return (NULL);
 
     close(fd);

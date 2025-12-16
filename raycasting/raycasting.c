@@ -1,6 +1,5 @@
 #include "cube3d.h"
 
-
 void draw_square(t_img *img, int x, int y, int size, int color)
 {
     int i;
