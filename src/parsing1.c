@@ -78,6 +78,8 @@ int check_and_store_player(t_game *game)
             {
                 count++;
                 game->player_dir = c;
+                game->p.px = (float)j * TILE_SIZE + (TILE_SIZE / 2.0f);
+                game->p.py = (float)i * TILE_SIZE + (TILE_SIZE / 2.0f);
                 if (count > 1)
                     return 0;
             }

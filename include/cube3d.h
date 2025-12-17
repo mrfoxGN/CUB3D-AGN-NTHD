@@ -5,15 +5,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-# include <mlx.h>
-// #include <../minilibx-linux/mlx.h>
+#include <mlx.h>
 #include <X11/keysym.h>
 # include <X11/X.h>
 #include <math.h>
 #include "../lib/libft.h"
-# include "../get_next_line_/get_next_line.h"
+#include "../get_next_line_/get_next_line.h"
 
 #define PI_MACRO 3.14159265358979323846
+
 #define W_HIGHT 800
 #define W_WIDTH 1200
 #define TILE_SIZE 16

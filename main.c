@@ -1,10 +1,26 @@
 #include "cube3d.h"
 
+void set_player_dir(t_game *game)
+{
+    if (game->player_dir == 'N')
+        game->p.angle = -PI_MACRO / 2;
+    else if (game->player_dir == 'S')
+        game->p.angle = PI_MACRO / 2;
+    else if (game->player_dir == 'E')
+        game->p.angle = 0;
+    else
+        game->p.angle = PI_MACRO;
+
+    game->p.dirx = cos(game->p.angle); 
+    game->p.diry = sin(game->p.angle);    
+}
+
 void init_game(t_game *game)
 {
-    game->p.angle = -PI_MACRO / 2;
-    game->p.dirx = 0; 
-    game->p.diry = -1;
+    if (!game)
+        return;
+    
+    set_player_dir(game);
     
     game->p.planex = 0.66;
     game->p.planey = 0;
@@ -18,7 +34,6 @@ void init_game(t_game *game)
 
     game->img.game = (void *)game;
 }
-
 
 int main(int ac, char **av)
 {

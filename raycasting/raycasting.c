@@ -183,9 +183,9 @@ int view_3d(t_game *game)
             
             wall_color = darken_color(wall_color, shade_factor);
             
-            draw_vertical_line(&game->img, i, 0, draw_start, 0x4DA8DA);
+            draw_vertical_line(&game->img, i, 0, draw_start, game->hexceiling);
             draw_vertical_line(&game->img, i, draw_start, draw_end, wall_color);
-            draw_vertical_line(&game->img, i, draw_end, W_HIGHT, 0xFFD66B);
+            draw_vertical_line(&game->img, i, draw_end, W_HIGHT, game->hexfloor);
         }
         i++;
     }

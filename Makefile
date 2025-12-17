@@ -5,7 +5,6 @@ LDFLAGS = -L/usr/local/lib -lmlx -lXext -lX11 -lm
 LIBFT_DIR = lib
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS =  main.c \
-		raycasting/game_mock.c \
 		raycasting/raycasting.c \
 		raycasting/img_utils.c \
 		raycasting/mouvement.c \
