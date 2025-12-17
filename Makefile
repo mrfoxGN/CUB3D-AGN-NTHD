@@ -6,6 +6,8 @@ LIBFT_DIR = lib
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS =  main.c \
 		raycasting/raycasting.c \
+		raycasting/raycasting1.c \
+		raycasting/raycasting2.c \
 		raycasting/img_utils.c \
 		raycasting/mouvement.c \
 		raycasting/dda.c \

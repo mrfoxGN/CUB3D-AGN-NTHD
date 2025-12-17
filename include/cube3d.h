@@ -143,19 +143,23 @@ static int is_inside_cell(char **map, int i, int j);*/
 
 /////////////////////////////////////////
 
-t_game *create_mock_game(void);
 int raycasting(t_game *game);
-void	my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
 
+// Movement functions
 int key_press(int key, void *param);
 int key_release(int key, void *param);
 int move_player(t_game *game);
 
 // DDA raycasting function
-
-
 t_res dda(t_game *game, float camerax);
 
-// Raycasting functions
+// Utils
+void	my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
+int darken_color(int color, float factor);
+void draw_ray_seg(t_img *img, float sx, float sy, float ex, float ey, int color);
+void fill_window(t_game *game, int w, int h ,int color);
+void draw_vertical_line(t_img *img, int x, int drawstart, int drawend, int color);
+
+void mini_map(t_game *game);
 
 #endif
