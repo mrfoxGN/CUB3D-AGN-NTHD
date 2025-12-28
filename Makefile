@@ -10,6 +10,7 @@ SRCS =  main.c \
 		raycasting/raycasting2.c \
 		raycasting/img_utils.c \
 		raycasting/mouvement.c \
+		raycasting/mouvement1.c \
 		raycasting/dda.c \
 		src/parsing1.c src/parsing2.c src/parsing3.c\
 		get_next_line_/get_next_line.c get_next_line_/get_next_line_utils.c \

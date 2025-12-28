@@ -16,10 +16,10 @@
 
 #define W_HIGHT 800
 #define W_WIDTH 1200
-#define TILE_SIZE 16
-#define SPEED 1
+#define TILE_SIZE 25
+#define SPEED 0.5
 #define ROT_SPEED 0.03
-#define PLAYER_SIZE 5
+#define PLAYER_SIZE 3
 #define FOV PI_MACRO / 3
 
 typedef struct s_player
@@ -118,6 +118,26 @@ typedef struct s_parse_ctx
     int     nb_lignes;
     int num_of_players;
 }   t_parse_ctx;
+
+typedef struct s_dda
+{
+    float raydirx;
+    float raydiry;
+    float deltax;
+    float deltay;
+    float posx;
+    float posy;
+    int mapx;
+    int mapy;
+    float sidedistx;
+    float sidedisty;
+    int stepx;
+    int stepy;
+    bool hit;
+    float distance;
+    float hitx;
+    float hity;
+}               t_dda;
 
 // Functions
 // **********************
