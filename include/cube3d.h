@@ -135,8 +135,6 @@ typedef struct s_dda
     int stepy;
     bool hit;
     float distance;
-    float hitx;
-    float hity;
 }               t_dda;
 
 // Functions
@@ -179,6 +177,7 @@ int darken_color(int color, float factor);
 void draw_ray_seg(t_img *img, float sx, float sy, float ex, float ey, int color);
 void fill_window(t_game *game, int w, int h ,int color);
 void draw_vertical_line(t_img *img, int x, int drawstart, int drawend, int color);
+int is_wall(t_game *game, float px, float py);
 
 void mini_map(t_game *game);
 

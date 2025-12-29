@@ -58,10 +58,8 @@ static void	dda_loop(t_game *game, t_dda *dda_vars, int *side)
 			dda_vars->mapy += dda_vars->stepy;
 			*side = 1;
 		}
-		if (dda_vars->mapx < 0 || dda_vars->mapy < 0
-			|| dda_vars->mapx >= game->map_width ||
-			dda_vars->mapy >= game->map_height || (game->map[dda_vars->mapy]
-					&& game->map[dda_vars->mapy][dda_vars->mapx] == '1'))
+		if (game->map[dda_vars->mapy]
+			&& game->map[dda_vars->mapy][dda_vars->mapx] == '1')
 		{
 			dda_vars->hit = true;
 			break ;
@@ -80,16 +78,12 @@ t_res	dda(t_game *game, float ray_angle)
 	init_dda(&p, ray_angle, &dda_vars);
 	dda_loop(game, &dda_vars, &side);
 	if (side == 0)
-		dda_vars.distance = (dda_vars.mapx - dda_vars.posx + (1
-					- dda_vars.stepx) / 2) / dda_vars.raydirx;
+		dda_vars.distance = dda_vars.sidedistx - dda_vars.deltax;
 	else
-		dda_vars.distance = (dda_vars.mapy - dda_vars.posy + (1
-					- dda_vars.stepy) / 2) / dda_vars.raydiry;
+		dda_vars.distance = dda_vars.sidedisty - dda_vars.deltay;
 	result.hit = dda_vars.hit;
-	dda_vars.hitx = dda_vars.posx + dda_vars.distance * dda_vars.raydirx;
-	dda_vars.hity = dda_vars.posy + dda_vars.distance * dda_vars.raydiry;
-	result.x = (int)floorf(dda_vars.hitx * TILE_SIZE);
-	result.y = (int)floorf(dda_vars.hity * TILE_SIZE);
+	result.x = (int)floorf((dda_vars.posx + dda_vars.distance * dda_vars.raydirx) * TILE_SIZE);
+	result.y = (int)floorf((dda_vars.posy + dda_vars.distance * dda_vars.raydiry) * TILE_SIZE);
 	result.distance = dda_vars.distance;
 	result.eye_dist = dda_vars.distance * cos(ray_angle - p.angle);
 	result.side = side;
