@@ -23,7 +23,7 @@ static int	load_texture(t_game *game, t_img *img, char *path)
         return (1);
     img->ptr = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &w, &h);
     if (!img->ptr)
-        return (1);
+        return (printf("Failed to load texture: %s\n", path), exit(1), 1);
     img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->end);
     img->w = w;
     img->h = h;
