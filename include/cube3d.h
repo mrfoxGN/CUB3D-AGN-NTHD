@@ -179,6 +179,38 @@ void draw_ray_seg(t_img *img, float sx, float sy, float ex, float ey, int color)
 void fill_window(t_game *game, int w, int h ,int color);
 void draw_vertical_line(t_img *img, int x, int drawstart, int drawend, int color);
 int is_wall(t_game *game, float px, float py);
+int is_blank_line(const char *s);
+int is_line_all_ones(const char *line);
+int is_line_border_valid(const char *line);
+int is_line_content_valid(const char *line);
+int check_and_store_player(t_game *game);
+ int is_inside_cell(char **map, int i, int j);
+ int is_allowed(char c);
+int check_enclosure(char **map);
+int is_map_valid(char **map);
+int count_lignes_map(char **map);
+char **expand_ligne_map(char **old_map, char *new_line);
+void free_map_all(char **map);
+int append_trimmed_line(t_parse_ctx *ctx, char *line_trim);
+int process_raw_line(t_parse_ctx *ctx, char *raw);
+void read_lines_into_map(int fd, t_parse_ctx *ctx);
+char **read_map(t_game *game);
+
+int pars_textures__argb(t_game *game);
+int pars_argb(char *line,t_game *game);
+int pars_textures(char *line,t_game *game);
+int	is_only_spaces(const char *s);
+
+
+char **read_file_cub_internal(char *file_name, t_game *game);
+int rgb_to_hex(int *rgb);
+int parse_textures_and_validate(t_game *game);
+ void close_fd_if_open(int fd);
+ int process_colors(t_game *game);
+ void free_split_arr(char **arr);
+ int count_elemnts(char **arr);
+ int *fill_elements(char **arr);
+  int rgb_values_valid(int *rgb);
 
 void mini_map(t_game *game);
 
