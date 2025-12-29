@@ -62,14 +62,4 @@ int *fill_elements(char **arr)
     }
     return 1;
 }
- /*main.c \
-		raycasting/raycasting.c \
-		raycasting/raycasting1.c \
-		raycasting/raycasting2.c \
-		raycasting/img_utils.c \
-		raycasting/textures.c \
-		raycasting/mouvement.c \
-		raycasting/mouvement1.c src/utils3.c\
-		raycasting/dda.c src/utils2.c\
-		src/parsing11.c src/parsing22.c src/parsing33.c src/utils1.c \
-		get_next_line_/get_next_line.c get_next_line_/get_next_line_utils.c \*/
+

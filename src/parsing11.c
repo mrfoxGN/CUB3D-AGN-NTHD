@@ -1,12 +1,11 @@
 #include "cube3d.h"
 #include <fcntl.h>
-// #include "get_next_line.h"
 
 char	**expand_ligne_map(char **old_map, char *new_line)
 {
-	char		**new_map;
-	int			i;
-	int			old_size;
+	char	**new_map;
+	int		i;
+	int		old_size;
 
 	old_size = count_lignes_map(old_map);
 	new_map = malloc(sizeof(char *) * (old_size + 2));
@@ -82,26 +81,17 @@ void	read_lines_into_map(int fd, t_parse_ctx *ctx)
 	}
 }
 
-static void	init_parse_ctx(t_parse_ctx *ctx, t_game *game)
-{
-	ctx->carte = NULL;
-	ctx->jeu = game;
-	ctx->contenu_vu = 0;
-	ctx->trou_vu = 0;
-	ctx->violation_trou = 0;
-	ctx->nb_lignes = -1;
-}
-
 char	**read_map(t_game *game)
 {
-	t_parse_ctx ctx;
+	t_parse_ctx	ctx;
+
 	init_parse_ctx(&ctx, game);
 	read_lines_into_map(game->fd, &ctx);
 	if (ctx.violation_trou || !is_map_valid(ctx.carte))
 	{
 		free_map_all(ctx.carte);
 		close(game->fd);
-		return NULL;
+		return (NULL);
 	}
 	game->map = ctx.carte;
 	if (!check_and_store_player(game))
@@ -109,9 +99,9 @@ char	**read_map(t_game *game)
 		free_map_all(ctx.carte);
 		game->map = NULL;
 		close(game->fd);
-		return NULL;
+		return (NULL);
 	}
 	game->map_height = ctx.nb_lignes + 1;
 	close(game->fd);
-	return ctx.carte;
+	return (ctx.carte);
 }

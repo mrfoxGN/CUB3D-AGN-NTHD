@@ -155,6 +155,7 @@ int	is_only_spaces(const char *s);
 int pars_textures__argb(t_game *game);
 int pars_argb(char *line,t_game *game);
 int pars_textures(char *line,t_game *game);
+ void	init_parse_ctx(t_parse_ctx *ctx, t_game *game);
 /*static int check_enclosure(char **map);
 static int is_allowed(char c);
 static int is_inside_cell(char **map, int i, int j);*/
