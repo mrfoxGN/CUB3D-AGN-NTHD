@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilib -I/usr/local/include
+CFLAGS =  -Iinclude -Ilib -I/usr/local/include #-Wall -Wextra -Werror
 LDFLAGS = -L/usr/local/lib -lmlx -lXext -lX11 -lm
 LIBFT_DIR = lib
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -9,6 +9,7 @@ SRCS =  main.c \
 		raycasting/raycasting1.c \
 		raycasting/raycasting2.c \
 		raycasting/img_utils.c \
+		raycasting/textures.c \
 		raycasting/mouvement.c \
 		raycasting/mouvement1.c \
 		raycasting/dda.c \

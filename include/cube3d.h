@@ -14,9 +14,9 @@
 
 #define PI_MACRO 3.14159265358979323846
 
-#define W_HIGHT 800
-#define W_WIDTH 1200
-#define TILE_SIZE 25
+#define W_HIGHT 1000
+#define W_WIDTH 1400
+#define TILE_SIZE 16
 #define SPEED 0.5
 #define ROT_SPEED 0.03
 #define PLAYER_SIZE 3
@@ -105,7 +105,7 @@ typedef struct s_game
     int hexceiling;
     t_img img;
     t_player p;
-    
+    t_img tex[4];
 } t_game;
 
 typedef struct s_parse_ctx
@@ -172,6 +172,7 @@ int move_player(t_game *game);
 t_res dda(t_game *game, float camerax);
 
 // Utils
+void    draw_column(t_game *game, t_res res, int i, float ray_angle);
 void	my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
 int darken_color(int color, float factor);
 void draw_ray_seg(t_img *img, float sx, float sy, float ex, float ey, int color);

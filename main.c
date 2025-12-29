@@ -14,13 +14,50 @@ void	set_player_dir(t_game *game)
 	game->p.diry = sin(game->p.angle);
 }
 
+static int	load_texture(t_game *game, t_img *img, char *path)
+{
+    int	w;
+    int	h;
+
+    if (!path)
+        return (1);
+    img->ptr = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &w, &h);
+    if (!img->ptr)
+        return (1);
+    img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->end);
+    img->w = w;
+    img->h = h;
+    img->game = game;
+    return (0);
+}
+
+int	load_textures(t_game *game)
+{
+    if (!game)
+        return (1);
+    if (load_texture(game, &game->tex[0], game->no_texture) != 0)
+        return (1);
+    if (load_texture(game, &game->tex[1], game->so_texture) != 0)
+        return (1);
+    if (load_texture(game, &game->tex[2], game->we_texture) != 0)
+        return (1);
+    if (load_texture(game, &game->tex[3], game->ea_texture) != 0)
+        return (1);
+    return (0);
+}
+
 void	init_game(t_game *game)
 {
 	if (!game)
 		return ;
+	game->mlx.mlx_ptr = mlx_init();
+	game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, W_WIDTH, W_HIGHT,
+			"Cube3D");
+	game->img.ptr = mlx_new_image(game->mlx.mlx_ptr, W_WIDTH, W_HIGHT);
+	game->img.addr = mlx_get_data_addr(game->img.ptr, &game->img.bpp,
+			&game->img.sl, &game->img.end);
 	set_player_dir(game);
-	game->p.planex = 0.66;
-	game->p.planey = 0;
+	load_textures(game);
 	game->p.up = false;
 	game->p.left = false;
 	game->p.down = false;

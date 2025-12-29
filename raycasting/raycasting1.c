@@ -52,7 +52,7 @@ int	cast_rays(t_game *game)
 
 	if (!game)
 		return (1);
-	for (i = 0; i < W_WIDTH; ++i)
+	for (i = 0; i < W_WIDTH; i+=10)
 	{
 		camerax = 2 * i / (float)W_WIDTH - 1;
 		res = dda(game, game->p.angle + camerax * (FOV / 2));
