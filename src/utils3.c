@@ -1,65 +1,86 @@
-  #include "cube3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 11:31:50 by anguenda          #+#    #+#             */
+/*   Updated: 2025/12/30 11:32:54 by anguenda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cube3d.h"
 #include <fcntl.h>
-void close_fd_if_open(int fd)
-{
-    if (fd >= 0)
-        close(fd);
-}
-void free_split_arr(char **arr)
-{
-    int i = 0;
-    if (!arr)
-        return;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
-}
-int count_elemnts(char **arr)
-{
-    int count = 0;
-    if (!arr)
-        return 0;
-    while (arr[count])
-        count++;
-    return count;
-}
-int *fill_elements(char **arr)
-{
-    int *values;
-    int i;
 
-    values = malloc(3 * sizeof(int));
-    if (!values)
-        return (NULL);
-    i = 0;
-    while (i < 3)
-    {
-        values[i] = 0;
-        i++;
-    }
-    i = 0;
-    while (arr && arr[i] && i < 3)
-    {
-        values[i] = atoi(arr[i]);//we need ft_atoi here && check range 0-255
-        i++;
-    }
-    return (values);
-}
- int rgb_values_valid(int *rgb)
+void	close_fd_if_open(int fd)
 {
-    int i;
-    if (!rgb)
-        return 0;
-    i = 0;
-    while (i < 3)
-    {
-        if (rgb[i] < 0 || rgb[i] > 255)
-            return 0;
-        i++;
-    }
-    return 1;
+	if (fd >= 0)
+		close(fd);
 }
 
+void	free_split_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+int	count_elemnts(char **arr)
+{
+	int	count;
+
+	count = 0;
+	if (!arr)
+		return (0);
+	while (arr[count])
+		count++;
+	return (count);
+}
+
+int	*fill_elements(char **arr)
+{
+	int	*values;
+	int	i;
+
+	values = malloc(3 * sizeof(int));
+	if (!values)
+		return (NULL);
+	i = 0;
+	while (i < 3)
+	{
+		values[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (arr && arr[i] && i < 3)
+	{
+		values[i] = ft_atoi(arr[i]);
+		i++;
+	}
+	return (values);
+}
+
+int	rgb_values_valid(int *rgb)
+{
+	int	i;
+
+	if (!rgb)
+		return (0);
+	i = 0;
+	while (i < 3)
+	{
+		if (rgb[i] < 0 || rgb[i] > 255)
+			return (0);
+		i++;
+	}
+	return (1);
+}

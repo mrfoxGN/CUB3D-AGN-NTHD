@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing33.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 11:32:06 by anguenda          #+#    #+#             */
+/*   Updated: 2025/12/30 11:32:38 by anguenda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 #include <fcntl.h>
 
@@ -11,7 +23,6 @@ int	process_colors(t_game *game)
 	ceiling = ft_split(game->ceiling_color, ',');
 	ok = 1;
 	if (count_elemnts(floor) != 3 || count_elemnts(ceiling) != 3)
-	// here need to check if each element is a number between 0-255
 		ok = 0;
 	else
 	{
@@ -37,7 +48,6 @@ int	parse_textures_and_validate(t_game *game)
 	return (1);
 }
 
-/* Convert an RGB array {r,g,b} to a single hex integer 0xRRGGBB */
 int	rgb_to_hex(int *rgb)
 {
 	int	r;
@@ -72,9 +82,6 @@ char	**read_file_cub(char *file_name, t_game *game)
 	return (read_file_cub_internal(file_name, game));
 }
 
-/* forward declaration for internal helper */
-
-/* internal helper so public read_file_cub stays under 25 lines */
 char	**read_file_cub_internal(char *file_name, t_game *game)
 {
 	char	**map;
@@ -82,23 +89,17 @@ char	**read_file_cub_internal(char *file_name, t_game *game)
 
 	fd = open(file_name, O_RDONLY);
 	game->fd = fd;
-	if (!parse_textures_and_validate(game))
+	if (!validate_textures_or_close(game, fd))
 	{
-		printf("Error parsing .cub file\n");
-		close_fd_if_open(fd);
 		return (NULL);
 	}
 	map = read_map(game);
-	if (!map)
+	if (!check_map_or_close(map, file_name, fd))
 	{
-		printf("Error: failed to read map from '%s'\n", file_name);
-		close_fd_if_open(fd);
 		return (NULL);
 	}
-	if (!process_colors(game))
+	if (!check_colors_or_close(game, fd))
 	{
-		printf("Error: Floor or Ceiling color format is incorrect\n");
-		close_fd_if_open(fd);
 		return (NULL);
 	}
 	close_fd_if_open(fd);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 11:32:01 by anguenda          #+#    #+#             */
+/*   Updated: 2025/12/30 21:41:36 by anguenda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 #include <fcntl.h>
 
@@ -59,7 +71,9 @@ int	is_line_content_valid(const char *line)
 	len = ft_strlen(line);
 	while (j < len - 1)
 	{
-		if (line[j] != '1' && line[j] != '0' && line[j] != 'N' && line[j] != 'S'
+		if (line[j] != '1'
+			&& line[j] != ' ' && line[j] != '0'
+			&& line[j] != 'N' && line[j] != 'S'
 			&& line[j] != 'E' && line[j] != 'W')
 			return (0);
 		j++;

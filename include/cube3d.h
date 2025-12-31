@@ -212,6 +212,13 @@ int parse_textures_and_validate(t_game *game);
  int count_elemnts(char **arr);
  int *fill_elements(char **arr);
   int rgb_values_valid(int *rgb);
+  int	validate_textures_or_close(t_game *game, int fd);
+  int	check_map_or_close(char **map, char *file_name, int fd);
+  int	check_colors_or_close(t_game *game, int fd);
+  void	store_player(t_game *game, int i, int j, char c);
+  int	neighbors_allowed(char **map, int i, int j);
+  int	has_all_neighbors(char **map, int i, int j);
+   int	is_walkable(char c);
 
 void mini_map(t_game *game);
 

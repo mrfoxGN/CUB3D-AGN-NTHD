@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 11:31:55 by anguenda          #+#    #+#             */
+/*   Updated: 2025/12/30 18:08:58 by anguenda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 #include <fcntl.h>
 
@@ -32,9 +44,8 @@ int	count_lignes_map(char **map)
 
 int	check_enclosure(char **map)
 {
-	int		i;
-	int		j;
-	char	c;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map && map[i])
@@ -42,16 +53,11 @@ int	check_enclosure(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			c = map[i][j];
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			if (is_walkable(map[i][j]))
 			{
-				if (!is_inside_cell(map, i - 1, j)
-        				|| !is_inside_cell(map, i + 1, j)
-        				|| !is_inside_cell(map, i, j - 1)
-                    	|| !is_inside_cell(map, i, j + 1))
+				if (!has_all_neighbors(map, i, j))
 					return (0);
-				if (!is_allowed(map[i - 1][j]) || !is_allowed(map[i + 1][j]) ||
-					!is_allowed(map[i][j - 1]) || !is_allowed(map[i][j + 1]))
+				if (!neighbors_allowed(map, i, j))
 					return (0);
 			}
 			j++;
@@ -63,22 +69,29 @@ int	check_enclosure(char **map)
 
 int	check_and_store_player(t_game *game)
 {
+	int		i;
+	int		j;
+	int		count;
 	char	c;
 
-	int i, j, count = 0;
 	if (!game || !game->map)
 		return (0);
 	game->player_dir = '\0';
-	for (i = 0; game->map[i]; ++i)
-		for (j = 0; game->map[i][j]; ++j)
-			if ((c = game->map[i][j]) == 'N' || c == 'S' || c == 'E'
-				|| c == 'W')
+	count = 0;
+	i = -1;
+	while (game->map[++i])
+	{
+		j = -1;
+		while (game->map[i][++j])
+		{
+			c = game->map[i][j];
+			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				if (++count > 1)
 					return (0);
-				game->player_dir = c;
-				game->p.px = j * (float)TILE_SIZE + (TILE_SIZE / 2.0f);
-				game->p.py = i * (float)TILE_SIZE + (TILE_SIZE / 2.0f);
+				store_player(game, i, j, c);
 			}
+		}
+	}
 	return (count == 1);
 }
