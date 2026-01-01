@@ -48,9 +48,10 @@ int	raycasting(t_game *game)
 {
 	if (!game)
 		return (1);
-	mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, key_press, &game->p);
+	mlx_hook(game->mlx.win_ptr, 17, 0, close_game, game);
+	mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, key_press, game);
 	mlx_hook(game->mlx.win_ptr, KeyRelease, KeyReleaseMask, key_release,
-			&game->p);
+			game);
 	mlx_loop_hook(game->mlx.mlx_ptr, draw_loop, game);
 	return (0);
 }

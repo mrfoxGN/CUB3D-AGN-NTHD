@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 11:06:49 by ntahadou          #+#    #+#             */
-/*   Updated: 2026/01/01 10:50:46 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:56:36 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strtrim(char const *s, char const *set)
 		start++;
 	while (end > start && is_inset(set, s[end - 1]))
 		end--;
-	trim = (char *)gc_malloc((end - start + 1) * sizeof(char), 1);
+	trim = (char *)malloc((end - start + 1) * sizeof(char));
 	if (trim == NULL)
 		return (NULL);
 	trim_start = trim;

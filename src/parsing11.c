@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:18 by anguenda          #+#    #+#             */
-/*   Updated: 2026/01/01 10:51:13 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 11:08:20 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	append_trimmed_line(t_parse_ctx *ctx, char *line_trim)
 {
 	char	**tmp;
 
+	tmp = NULL;
 	tmp = expand_ligne_map(ctx->carte, line_trim);
 	if (!tmp)
 		return (0);
@@ -96,6 +97,8 @@ char	**read_map(t_game *game)
 {
 	t_parse_ctx	ctx;
 
+	game->map_width = 0;
+    game->map_height = 0;
 	init_parse_ctx(&ctx, game);
 	read_lines_into_map(game->fd, &ctx);
 	if (ctx.violation_trou || !is_map_valid(ctx.carte))

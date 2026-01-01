@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:48:36 by anguenda          #+#    #+#             */
-/*   Updated: 2025/03/19 16:03:44 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 11:39:18 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include "../include/cube3d.h"
 int	ft_strchr1(char *s, char c)
 {
 	int	i;

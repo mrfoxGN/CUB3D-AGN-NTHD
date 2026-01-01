@@ -223,4 +223,6 @@ int parse_textures_and_validate(t_game *game);
 
 void mini_map(t_game *game);
 
+int close_game(t_game *game);
+
 #endif

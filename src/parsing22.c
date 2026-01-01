@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing22.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:12 by anguenda          #+#    #+#             */
-/*   Updated: 2025/12/30 11:32:35 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 11:21:47 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ int	pars_textures(char *line, t_game *game)
 {
 	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
 	{
-		game->no_texture = strdup((line + 3));
+		game->no_texture = ft_strdup((line + 3));
 		game->textures_parsed++;
 	}
 	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
 	{
-		game->so_texture = strdup((line + 3));
+		game->so_texture = ft_strdup((line + 3));
 		game->textures_parsed++;
 	}
 	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
 	{
-		game->we_texture = strdup((line + 3));
+		game->we_texture = ft_strdup((line + 3));
 		game->textures_parsed++;
 	}
 	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 	{
-		game->ea_texture = strdup((line + 3));
+		game->ea_texture = ft_strdup((line + 3));
 		game->textures_parsed++;
 	}
 	else if (line[0] != '\0' && !is_only_spaces(line))
@@ -63,12 +63,12 @@ int	pars_argb(char *line, t_game *game)
 {
 	if (line[0] == 'F' && line[1] == ' ')
 	{
-		game->floor_color = strdup(line + 2);
+		game->floor_color = ft_strdup(line + 2);
 		game->argb_parsed++;
 	}
 	else if (line[0] == 'C' && line[1] == ' ')
 	{
-		game->ceiling_color = strdup(line + 2);
+		game->ceiling_color = ft_strdup(line + 2);
 		game->argb_parsed++;
 	}
 	else if (line[0] != '\0' && !is_only_spaces(line))

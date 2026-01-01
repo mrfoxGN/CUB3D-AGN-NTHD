@@ -83,4 +83,5 @@ int	main(int ac, char **av)
 	init_game(game);
 	raycasting(game);
 	mlx_loop(game->mlx.mlx_ptr);
+	return (0);
 }

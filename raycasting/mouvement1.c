@@ -3,49 +3,55 @@
 
 int	key_press(int key, void *param)
 {
-	t_player	*p;
+	t_game	*game;
 
 	if (!param)
 		return (1);
-	p = (t_player *)param;
+	game = (t_game *)param;
 	if (key == XK_Escape)
+	{
+		close_game(game);
 		exit(0);
+	}
 	if (key == XK_w)
-		p->up = true;
+		game->p.up = true;
 	if (key == XK_d)
-		p->right = true;
+		game->p.right = true;
 	if (key == XK_s)
-		p->down = true;
+		game->p.down = true;
 	if (key == XK_a)
-		p->left = true;
+		game->p.left = true;
 	if (key == XK_Left)
-		p->turn_left = true;
+		game->p.turn_left = true;
 	if (key == XK_Right)
-		p->turn_right = true;
+		game->p.turn_right = true;
 	return (0);
 }
 
 int	key_release(int key, void *param)
 {
-	t_player	*p;
+	t_game	*game;
 
 	if (!param)
 		return (1);
-	p = (t_player *)param;
+	game = (t_game *)param;
 	if (key == XK_Escape)
+	{
+		close_game(game);
 		exit(0);
+	}
 	if (key == XK_w)
-		p->up = false;
+		game->p.up = false;
 	if (key == XK_d)
-		p->right = false;
+		game->p.right = false;
 	if (key == XK_s)
-		p->down = false;
+		game->p.down = false;
 	if (key == XK_a)
-		p->left = false;
+		game->p.left = false;
 	if (key == XK_Left)
-		p->turn_left = false;
+		game->p.turn_left = false;
 	if (key == XK_Right)
-		p->turn_right = false;
+		game->p.turn_right = false;
 	return (0);
 }
 

@@ -1,0 +1,30 @@
+{
+   mlx_xinit_threads
+   Memcheck:Leak
+   ...
+   fun:XInitThreads
+   fun:mlx_init
+}
+{
+   mlx_xopendisplay
+   Memcheck:Leak
+   ...
+   fun:XOpenDisplay
+   fun:mlx_init
+}
+{
+   mlx_xcreateimage
+   Memcheck:Leak
+   ...
+   fun:XCreateImage
+   fun:mlx_new_image
+}
+{
+   mlx_glibc_locale
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/*/libc-*
+   fun:setlocale
+   fun:XSetLocaleModifiers
+   fun:mlx_init
+}
