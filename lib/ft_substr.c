@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/cube3d.h"
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	else if (start + len > slen)
 		len = slen - start;
-	sub = (char *)gc_malloc((len + 1) * sizeof(char),1);
+	sub = (char *)gc_malloc((len + 1) * sizeof(char), 1);
 	if (sub == NULL)
 		return (NULL);
 	while (s[start + i] && i < len)

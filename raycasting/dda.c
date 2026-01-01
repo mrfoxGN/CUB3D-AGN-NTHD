@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/01 13:30:15 by ntahadou          #+#    #+#             */
+/*   Updated: 2026/01/01 13:30:16 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 static void	init_dda_vars(t_player *p, float ray_angle, t_dda *dda_vars)
@@ -82,8 +94,10 @@ t_res	dda(t_game *game, float ray_angle)
 	else
 		dda_vars.distance = dda_vars.sidedisty - dda_vars.deltay;
 	result.hit = dda_vars.hit;
-	result.x = (int)floorf((dda_vars.posx + dda_vars.distance * dda_vars.raydirx) * TILE_SIZE);
-	result.y = (int)floorf((dda_vars.posy + dda_vars.distance * dda_vars.raydiry) * TILE_SIZE);
+	result.x = (int)floorf((dda_vars.posx + dda_vars.distance
+				* dda_vars.raydirx) * TILE_SIZE);
+	result.y = (int)floorf((dda_vars.posy + dda_vars.distance
+				* dda_vars.raydiry) * TILE_SIZE);
 	result.distance = dda_vars.distance;
 	result.eye_dist = dda_vars.distance * cos(ray_angle - p.angle);
 	result.side = side;

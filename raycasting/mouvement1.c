@@ -1,5 +1,17 @@
-#include <math.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouvement1.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/01 13:30:54 by ntahadou          #+#    #+#             */
+/*   Updated: 2026/01/01 13:30:55 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
+#include <math.h>
 
 int	key_press(int key, void *param)
 {
@@ -56,7 +68,7 @@ int	key_release(int key, void *param)
 }
 
 static void	fill_player_corners(float px, float py, int player_size,
-				float corners[4][2])
+		float corners[4][2])
 {
 	corners[0][0] = px;
 	corners[0][1] = py;
@@ -83,8 +95,7 @@ int	is_wall(t_game *game, float px, float py)
 	{
 		map_x = (int)floorf(corners[i][0] / TILE_SIZE);
 		map_y = (int)floorf(corners[i][1] / TILE_SIZE);
-		if (map_x < 0 || map_y < 0
-			|| map_y >= game->map_height
+		if (map_x < 0 || map_y < 0 || map_y >= game->map_height
 			|| map_x >= game->map_width)
 			return (1);
 		if (game->map[map_y] && game->map[map_y][map_x] == '1')

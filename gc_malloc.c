@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gc_malloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 21:58:58 by ntahadou          #+#    #+#             */
+/*   Updated: 2026/01/01 15:20:00 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
-
-void free_mlx(t_game *game)
+void	free_mlx(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game)
-		return;
+		return ;
 	if (game->img.ptr)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->img.ptr);
-	for (i = 0; i < 4; i++)
+	i = 0;
+	while (i < 4)
 	{
 		if (game->tex[i].ptr)
 			mlx_destroy_image(game->mlx.mlx_ptr, game->tex[i].ptr);
+		i++;
 	}
 	if (game->mlx.win_ptr)
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
@@ -37,7 +50,7 @@ void	*gc_malloc(size_t size, int mode)
 		{
 			ft_putstr_fd("malloc Failed: ", STDERR_FILENO);
 			gc_malloc(0, 0);
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 		new_node = ft_lstnew(content);
 		ft_lstadd_back(&head_list, new_node);
@@ -50,11 +63,11 @@ void	*gc_malloc(size_t size, int mode)
 	return (content);
 }
 
-int close_game(t_game *game)
+int	close_game(t_game *game)
 {
-    free_mlx(game);
-    gc_malloc(0, 0); 
-    free(game);
-    exit(0);
-    return (0);
+	free_mlx(game);
+	gc_malloc(0, 0);
+	free(game);
+	exit(0);
+	return (0);
 }

@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/cube3d.h"
+#include "libft.h"
+
 static int	is_inset(const char *set, char c)
 {
 	while (*set)

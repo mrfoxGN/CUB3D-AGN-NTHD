@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:06 by anguenda          #+#    #+#             */
-/*   Updated: 2026/01/01 12:21:56 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 15:15:56 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	process_colors(t_game *game)
 		ok = 0;
 	else
 	{
-		game->Floor = fill_elements(floor);
-		game->Ceiling = fill_elements(ceiling);
-		if (game->Floor)
-			game->hexfloor = rgb_to_hex(game->Floor);
-		if (game->Ceiling)
-			game->hexceiling = rgb_to_hex(game->Ceiling);
+		game->floor = fill_elements(floor);
+		game->ceiling = fill_elements(ceiling);
+		if (game->floor)
+			game->hexfloor = rgb_to_hex(game->floor);
+		if (game->ceiling)
+			game->hexceiling = rgb_to_hex(game->ceiling);
 	}
-	ok = rgb_values_valid(game->Floor) && rgb_values_valid(game->Ceiling);
+	ok = rgb_values_valid(game->floor) && rgb_values_valid(game->ceiling);
 	return (ok);
 }
 

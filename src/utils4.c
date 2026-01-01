@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:31:37 by anguenda          #+#    #+#             */
-/*   Updated: 2025/12/30 11:32:58 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 15:15:56 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_colors_or_close(t_game *game, int fd)
 {
 	if (process_colors(game))
 		return (1);
-	printf("Error: Floor or Ceiling color format is incorrect\n");
+	printf("Error: floor or ceiling color format is incorrect\n");
 	close_fd_if_open(fd);
 	return (0);
 }

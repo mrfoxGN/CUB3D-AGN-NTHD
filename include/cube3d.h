@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 21:58:58 by ntahadou          #+#    #+#             */
+/*   Updated: 2026/01/01 15:17:59 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
@@ -20,7 +32,7 @@
 # define SPEED 0.5
 # define ROT_SPEED 0.03
 # define PLAYER_SIZE 3
-# define FOV PI_MACRO / 3
+# define FOV 1.047198
 
 typedef struct s_player
 {
@@ -99,8 +111,8 @@ typedef struct s_game
 	char		*ceiling_color;
 	int			textures_parsed;
 	int			argb_parsed;
-	int			*Floor;
-	int			*Ceiling;
+	int			*floor;
+	int			*ceiling;
 	int			hexfloor;
 	int			hexceiling;
 	t_img		img;
@@ -118,6 +130,46 @@ typedef struct s_parse_ctx
 	int			nb_lignes;
 	int			num_of_players;
 }				t_parse_ctx;
+
+typedef struct s_ray_seg
+{
+	t_img	*img;
+	float	sx;
+	float	sy;
+	float	ex;
+	float	ey;
+	int		color;
+}	t_ray_seg;
+
+typedef struct s_draw_line
+{
+	t_img	*img;
+	int		x;
+	int		drawstart;
+	int		drawend;
+	int		color;
+}	t_draw_line;
+
+typedef struct s_draw_params
+{
+	t_img	*img;
+	int		x;
+	int		y;
+	int		size;
+	int		color;
+}	t_draw_params;
+
+typedef struct s_render_wall
+{
+	t_game	*game;
+	t_res	res;
+	int		x;
+	int		tex_num;
+	int		tex_x;
+	int		lineheight;
+	int		draw_start;
+	int		draw_end;
+}	t_render_wall;
 
 typedef struct s_dda
 {
@@ -156,9 +208,6 @@ int				pars_textures__argb(t_game *game);
 int				pars_argb(char *line, t_game *game);
 int				pars_textures(char *line, t_game *game);
 void			init_parse_ctx(t_parse_ctx *ctx, t_game *game);
-/*static int check_enclosure(char **map);
-static int		is_allowed(char c);
-static int	is_inside_cell(char **map, int i, int j);*/
 
 /////////////////////////////////////////
 
@@ -177,11 +226,9 @@ t_res			dda(t_game *game, float camerax);
 void			draw_column(t_game *game, t_res res, int i, float ray_angle);
 void			my_mlx_pixel_put(t_img *dest, int pixel, int x, int y);
 int				darken_color(int color, float factor);
-void			draw_ray_seg(t_img *img, float sx, float sy, float ex, float ey,
-					int color);
+void			draw_ray_seg(t_ray_seg *ray);
 void			fill_window(t_game *game, int w, int h, int color);
-void			draw_vertical_line(t_img *img, int x, int drawstart,
-					int drawend, int color);
+void			draw_vertical_line(t_draw_line *params);
 int				is_wall(t_game *game, float px, float py);
 int				is_blank_line(const char *s);
 int				is_line_all_ones(const char *line);

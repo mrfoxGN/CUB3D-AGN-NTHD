@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 21:58:58 by ntahadou          #+#    #+#             */
+/*   Updated: 2026/01/01 15:12:46 by ntahadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 void	set_player_dir(t_game *game)
@@ -16,34 +28,34 @@ void	set_player_dir(t_game *game)
 
 static int	load_texture(t_game *game, t_img *img, char *path)
 {
-    int	w;
-    int	h;
+	int	w;
+	int	h;
 
-    if (!path)
-        return (1);
-    img->ptr = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &w, &h);
-    if (!img->ptr)
-        return (printf("Failed to load texture: %s\n", path), 1);
-    img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->end);
-    img->w = w;
-    img->h = h;
-    img->game = game;
-    return (0);
+	if (!path)
+		return (1);
+	img->ptr = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &w, &h);
+	if (!img->ptr)
+		return (printf("Failed to load texture: %s\n", path), 1);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->end);
+	img->w = w;
+	img->h = h;
+	img->game = game;
+	return (0);
 }
 
 int	load_textures(t_game *game)
 {
-    if (!game)
-        return (1);
-    if (load_texture(game, &game->tex[0], game->no_texture) != 0)
-        return (1);
-    if (load_texture(game, &game->tex[1], game->so_texture) != 0)
-        return (1);
-    if (load_texture(game, &game->tex[2], game->we_texture) != 0)
-        return (1);
-    if (load_texture(game, &game->tex[3], game->ea_texture) != 0)
-        return (1);
-    return (0);
+	if (!game)
+		return (1);
+	if (load_texture(game, &game->tex[0], game->no_texture) != 0)
+		return (1);
+	if (load_texture(game, &game->tex[1], game->so_texture) != 0)
+		return (1);
+	if (load_texture(game, &game->tex[2], game->we_texture) != 0)
+		return (1);
+	if (load_texture(game, &game->tex[3], game->ea_texture) != 0)
+		return (1);
+	return (0);
 }
 
 void	init_game(t_game *game)
@@ -70,15 +82,15 @@ void	init_game(t_game *game)
 
 int	main(int ac, char **av)
 {
-	t_game *game;
+	t_game	*game;
 
 	if (ac != 2)
 		return (0);
 	if (!check_cub_extension(av[1]))
-    {
-        ft_putstr_fd("Error: File must have .cub extension\n", STDERR_FILENO);
-        return (1);
-    }
+	{
+		ft_putstr_fd("Error: File must have .cub extension\n", STDERR_FILENO);
+		return (1);
+	}
 	game = malloc(sizeof(t_game));
 	ft_bzero(game, sizeof(t_game));
 	if (!game)

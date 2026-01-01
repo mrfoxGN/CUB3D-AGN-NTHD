@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/cube3d.h"
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -25,7 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s2 == NULL)
 		return (ft_strdup(s1));
 	joinsize = ft_strlen(s1) + ft_strlen(s2) + 1;
-	join = (char *)gc_malloc(joinsize * sizeof(char),1);
+	join = (char *)gc_malloc(joinsize * sizeof(char), 1);
 	if (join == NULL)
 		return (NULL);
 	ft_strlcpy(join, s1, ft_strlen(s1) + 1);
