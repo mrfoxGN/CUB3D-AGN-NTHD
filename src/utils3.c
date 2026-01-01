@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:31:50 by anguenda          #+#    #+#             */
-/*   Updated: 2025/12/30 11:32:54 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:51:28 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	*fill_elements(char **arr)
 	int	*values;
 	int	i;
 
-	values = malloc(3 * sizeof(int));
+	values = gc_malloc(3 * sizeof(int), 1);
 	if (!values)
 		return (NULL);
 	i = 0;

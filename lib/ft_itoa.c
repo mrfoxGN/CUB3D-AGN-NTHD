@@ -6,11 +6,12 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:35:32 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/09 12:18:32 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:49:41 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../include/cube3d.h"
 
 static int	count_n(long n, int sign)
 {
@@ -44,7 +45,7 @@ char	*ft_itoa(int n)
 		nb = -nb;
 	}
 	count = count_n(nb, sign);
-	result = (char *)malloc((count + 1) * sizeof(char));
+	result = (char *)gc_malloc((count + 1) * sizeof(char), 1);
 	if (!result)
 		return (NULL);
 	result[count] = '\0';

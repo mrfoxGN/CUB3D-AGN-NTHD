@@ -6,11 +6,12 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:17:03 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/10 15:50:58 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:50:56 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../include/cube3d.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -26,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	else if (start + len > slen)
 		len = slen - start;
-	sub = (char *)malloc((len + 1) * sizeof(char));
+	sub = (char *)gc_malloc((len + 1) * sizeof(char),1);
 	if (sub == NULL)
 		return (NULL);
 	while (s[start + i] && i < len)

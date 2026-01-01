@@ -6,11 +6,12 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:37:44 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/11 15:43:02 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:50:29 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../include/cube3d.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -24,7 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s2 == NULL)
 		return (ft_strdup(s1));
 	joinsize = ft_strlen(s1) + ft_strlen(s2) + 1;
-	join = (char *)malloc(joinsize * sizeof(char));
+	join = (char *)gc_malloc(joinsize * sizeof(char),1);
 	if (join == NULL)
 		return (NULL);
 	ft_strlcpy(join, s1, ft_strlen(s1) + 1);

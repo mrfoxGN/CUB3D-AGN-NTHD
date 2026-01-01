@@ -169,6 +169,7 @@ int key_press(int key, void *param);
 int key_release(int key, void *param);
 int move_player(t_game *game);
 
+void	*gc_malloc(size_t size, int mode);
 // DDA raycasting function
 t_res dda(t_game *game, float camerax);
 

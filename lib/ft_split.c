@@ -6,11 +6,12 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:07:40 by ntahadou          #+#    #+#             */
-/*   Updated: 2024/11/11 21:00:04 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:50:06 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../include/cube3d.h"
 
 static size_t	word_count(const char *s, char c)
 {
@@ -47,7 +48,7 @@ static char	*fill_word(const char *s, int start, int end)
 	size_t	i;
 
 	i = 0;
-	word = (char *)malloc((end - start + 1) * sizeof(char));
+	word = (char *)gc_malloc((end - start + 1) * sizeof(char),1 );
 	if (word == NULL)
 		return (NULL);
 	while (start < end)
@@ -95,7 +96,7 @@ char	**ft_split(const char *s, char c)
 	if (s == NULL)
 		return (NULL);
 	wordcount = word_count(s, c);
-	arr = (char **)malloc((wordcount + 1) * sizeof(char *));
+	arr = (char **)gc_malloc((wordcount + 1) * sizeof(char *),1 );
 	if (arr == NULL)
 		return (NULL);
 	return (split_words(s, c, arr));

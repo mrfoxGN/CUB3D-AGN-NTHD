@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing11.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:18 by anguenda          #+#    #+#             */
-/*   Updated: 2025/12/30 11:32:28 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 10:51:13 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include <fcntl.h>
 
 char	**expand_ligne_map(char **old_map, char *new_line)
 {
@@ -20,7 +19,7 @@ char	**expand_ligne_map(char **old_map, char *new_line)
 	int		old_size;
 
 	old_size = count_lignes_map(old_map);
-	new_map = malloc(sizeof(char *) * (old_size + 2));
+	new_map = gc_malloc(sizeof(char *) * (old_size + 2), 1);
 	i = 0;
 	if (!new_map)
 		return (old_map);
