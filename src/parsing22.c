@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:12 by anguenda          #+#    #+#             */
-/*   Updated: 2026/01/01 11:21:47 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:01:54 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,23 @@ int	pars_argb(char *line, t_game *game)
 
 int	pars_textures__argb(t_game *game)
 {
-	char	*line1;
+	char	*raw;
 	char	*line;
-	int		i;
 
-	i = 0;
 	game->textures_parsed = 0;
 	game->argb_parsed = 0;
 	if (!game)
 		return (0);
 	while (game->textures_parsed < 4 || game->argb_parsed < 2)
 	{
-		line = get_next_line(game->fd);
-		if (!line)
+		raw = get_next_line(game->fd);
+		if (!raw)
 			return (0);
-		line1 = ft_strtrim(line, "\n");
-		free(line);
-		line = line1;
+		line = ft_strtrim(raw, "\n");
 		if (!pars_textures(line, game) && !pars_argb(line, game))
 		{
 			return (0);
 		}
-		free(line);
-		i++;
 	}
 	return (1);
 }

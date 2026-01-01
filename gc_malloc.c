@@ -18,7 +18,8 @@ void free_mlx(t_game *game)
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	if (game->mlx.mlx_ptr)
 		mlx_destroy_display(game->mlx.mlx_ptr);
-	free(game->mlx.mlx_ptr);
+	if (game->mlx.mlx_ptr)
+		free(game->mlx.mlx_ptr);
 }
 
 void	*gc_malloc(size_t size, int mode)
@@ -52,20 +53,8 @@ void	*gc_malloc(size_t size, int mode)
 int close_game(t_game *game)
 {
     free_mlx(game);
-    
-    // if (game->map)
-    // {
-    //     int i = 0;
-    //     while (game->map[i])
-    //         free(game->map[i++]);
-    //     free(game->map);
-    // }
-
-    gc_malloc(0, 1); 
-
+    gc_malloc(0, 0); 
     free(game);
-
-    printf("Game closed cleanly\n");
     exit(0);
     return (0);
 }

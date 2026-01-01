@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:48:43 by anguenda          #+#    #+#             */
-/*   Updated: 2025/03/19 16:03:49 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 12:09:24 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/cube3d.h"
 #include "get_next_line.h"
-
-static void	ft_free(char *buff)
-{
-	if (!buff)
-		return ;
-	free(buff);
-}
 
 static char	*next_line(char *buff)
 {
@@ -30,11 +24,11 @@ static char	*next_line(char *buff)
 	while (buff[i] && buff[i] != '\n')
 		i++;
 	if (!buff[i])
-		return (ft_free(buff), NULL);
+		return (NULL);
 	i++;
-	nline = ft_malloc((ft_strleen(buff) - i + 1), sizeof(char));
+	nline = gc_malloc((ft_strleen(buff) - i + 1), 1);
 	if (!nline)
-		return (ft_free(buff), NULL);
+		return (NULL);
 	while (buff[i])
 	{
 		nline[j] = buff[i];
@@ -42,7 +36,6 @@ static char	*next_line(char *buff)
 		j++;
 	}
 	nline[j] = '\0';
-	ft_free(buff);
 	return (nline);
 }
 
@@ -57,11 +50,11 @@ static char	*get_line(char *buff)
 	while (buff[i] && buff[i] != '\n')
 		i++;
 	if (buff[i] == '\n')
-		line = ft_malloc(i + 2, sizeof(char));
+		line = gc_malloc(i + 2, sizeof(char));
 	else
-		line = ft_malloc(i + 1, sizeof(char));
+		line = gc_malloc(i + 1, sizeof(char));
 	if (!line)
-		return (ft_free(buff), NULL);
+		return (NULL);
 	i = 0;
 	while (buff[i] && buff[i] != '\n')
 	{
@@ -79,24 +72,23 @@ static char	*read_file(char *buff, int fd)
 	char	*readed;
 	ssize_t	r;
 
-	readed = ft_malloc(BUFFER_SIZE + 1, sizeof(char));
+	readed = gc_malloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!readed)
 		return (NULL);
 	while (1)
 	{
 		r = read(fd, readed, BUFFER_SIZE);
 		if (r < 0)
-			return (ft_free(readed), ft_free(buff), NULL);
+			return (NULL);
 		if (!r)
 			break ;
 		readed[r] = 0;
-		buff = ft_strjoiin(buff, readed);
+		buff = ft_strjoin(buff, readed);
 		if (!buff)
-			return (ft_free(readed), NULL);
-	if (ft_strchr1(readed, '\n'))
+			return (NULL);
+		if (ft_strchr1(readed, '\n'))
 			break ;
 	}
-	ft_free(readed);
 	return (buff);
 }
 
@@ -106,7 +98,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd == -2)
-		return (ft_free(buff), NULL);
+		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 2147483647)
 		return (NULL);
 	buff = read_file(buff, fd);
@@ -114,7 +106,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(buff);
 	buff = next_line(buff);
-	if (!buff)
-		ft_free(buff);
 	return (line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing33.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anguenda <anguenda@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:06 by anguenda          #+#    #+#             */
-/*   Updated: 2025/12/30 11:32:38 by anguenda         ###   ########.fr       */
+/*   Updated: 2026/01/01 12:21:56 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	process_colors(t_game *game)
 		if (game->Ceiling)
 			game->hexceiling = rgb_to_hex(game->Ceiling);
 	}
-	free_split_arr(floor);
-	free_split_arr(ceiling);
 	ok = rgb_values_valid(game->Floor) && rgb_values_valid(game->Ceiling);
 	return (ok);
 }

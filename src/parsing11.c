@@ -6,7 +6,7 @@
 /*   By: ntahadou <ntahadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 11:32:18 by anguenda          #+#    #+#             */
-/*   Updated: 2026/01/01 11:08:20 by ntahadou         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:01:07 by ntahadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ int	process_raw_line(t_parse_ctx *ctx, char *raw)
 	char	*trim;
 
 	trim = ft_strtrim(raw, "\n");
-	free(raw);
 	if (is_blank_line(trim))
 	{
 		if (ctx->contenu_vu && !ctx->trou_vu)
 			ctx->trou_vu = 1;
-		free(trim);
 		return (1);
 	}
 	if (trim && trim[0])
@@ -69,13 +67,11 @@ int	process_raw_line(t_parse_ctx *ctx, char *raw)
 			ctx->violation_trou = 1;
 		if (!append_trimmed_line(ctx, trim))
 		{
-			free(trim);
 			return (0);
 		}
 		ctx->contenu_vu = 1;
 		ctx->nb_lignes++;
 	}
-	free(trim);
 	return (1);
 }
 
@@ -98,19 +94,17 @@ char	**read_map(t_game *game)
 	t_parse_ctx	ctx;
 
 	game->map_width = 0;
-    game->map_height = 0;
+	game->map_height = 0;
 	init_parse_ctx(&ctx, game);
 	read_lines_into_map(game->fd, &ctx);
 	if (ctx.violation_trou || !is_map_valid(ctx.carte))
 	{
-		free_map_all(ctx.carte);
 		close(game->fd);
 		return (NULL);
 	}
 	game->map = ctx.carte;
 	if (!check_and_store_player(game))
 	{
-		free_map_all(ctx.carte);
 		game->map = NULL;
 		close(game->fd);
 		return (NULL);
